@@ -33,6 +33,30 @@ impl DiGraph {
         Edge(from, to)
     }
 
+    pub fn has_edge(&self, from: Node, to: Node) -> bool {
+        let (from, to) = (from.0, to.0);
+        self.assoc[from].contains(&to)
+    }
+
+    pub fn get_node(&self, index: usize) -> Option<Node> {
+        if index < self.len() {
+            Some(Node(index))
+        } else {
+            None
+        }
+    }
+
+    pub fn get_edge(&self, from: usize, to: usize) -> Option<Edge> {
+        if match (self.get_node(from), self.get_node(to)) {
+            (Some(from), Some(to)) => self.has_edge(from, to),
+            _ => false,
+        } {
+            Some(Edge(from, to))
+        } else {
+            None
+        }
+    }
+
     pub fn cycle_from(&self, target: Node) -> bool {
         let target = target.0;
         let mut visited = vec![false; self.len()];
@@ -89,5 +113,28 @@ mod test {
         assert!(graph.cycle_from(n0));
         assert!(graph.cycle_from(n1));
         assert!(!graph.cycle_from(n2));
+    }
+
+    #[test]
+    fn get_node() {
+        let mut graph = DiGraph::new();
+        let n0 = graph.node();
+        let n1 = graph.node();
+        let n2 = graph.node();
+        assert_eq!(graph.get_node(0), Some(n0));
+        assert_eq!(graph.get_node(1), Some(n1));
+        assert_eq!(graph.get_node(2), Some(n2));
+        assert_eq!(graph.get_node(3), None);
+    }
+
+    #[test]
+    fn get_edge() {
+        let mut graph = DiGraph::new();
+        let n0 = graph.node();
+        let n1 = graph.node();
+        let e0 = graph.edge(n0, n1);
+        assert_eq!(graph.get_edge(0, 1), Some(e0));
+        assert_eq!(graph.get_edge(1, 0), None);
+        assert_eq!(graph.get_edge(1, 2), None);
     }
 }
