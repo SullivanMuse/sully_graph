@@ -1,8 +1,20 @@
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub struct Node(usize);
 
+impl Node {
+    pub fn to_usize(&self) -> usize {
+        self.0
+    }
+}
+
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub struct Edge(usize, usize);
+
+impl Edge {
+    pub fn to_tuple(&self) -> (usize, usize) {
+        (self.0, self.1)
+    }
+}
 
 #[derive(Debug)]
 pub struct DiGraph {
