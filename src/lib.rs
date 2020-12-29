@@ -1,11 +1,11 @@
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
-struct Node(usize);
+pub struct Node(usize);
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
-struct Edge(usize, usize);
+pub struct Edge(usize, usize);
 
 #[derive(Debug)]
-struct DiGraph {
+pub struct DiGraph {
     assoc: Vec<Vec<usize>>,
 }
 
