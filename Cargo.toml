@@ -1,8 +1,11 @@
 [package]
-name = "graph"
+name = "sully_graph"
 version = "0.1.0"
 authors = ["Sullivan Muse <sullivan.muse@gmail.com>"]
 edition = "2018"
+license = "GPL-3.0-only"
+description = "Personal graph library"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
